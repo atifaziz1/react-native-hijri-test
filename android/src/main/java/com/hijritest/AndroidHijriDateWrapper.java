@@ -19,6 +19,7 @@ import com.facebook.react.bridge.WritableMap;
 import com.facebook.react.bridge.WritableNativeMap;
 import com.facebook.react.module.annotations.ReactModule;
 
+import com.github.msarhan.ummalqura.calendar.UmmalquraCalendar;
 import com.hijritest.rnHijriDatePicker.RNConstants;
 import com.hijritest.rnHijriDatePicker.RNDate;
 //import com.hijritest.rnHijriDatePicker.date.hijri.HijriDatePickerDialog;
@@ -68,10 +69,16 @@ public class AndroidHijriDateWrapper extends ReactContextBaseJavaModule {
 //        RNDate rnDate = new RNDate(createFragmentArguments(options));
 
       final DatePickerDialogListener listener = new DatePickerDialogListener(promise);
-      int year = Calendar.getInstance().get(Calendar.YEAR);
-      int month = Calendar.getInstance().get(Calendar.MONTH);
+      int cYear = Calendar.getInstance().get(Calendar.YEAR);
+      int cMonth = Calendar.getInstance().get(Calendar.MONTH);
 
-      int day = Calendar.getInstance().get(Calendar.DAY_OF_MONTH);
+      int cDay = Calendar.getInstance().get(Calendar.DAY_OF_MONTH);
+
+      UmmalquraCalendar ummalquraCalendar = new UmmalquraCalendar();
+      int year = ummalquraCalendar.get(cYear);
+      int month = ummalquraCalendar.get(cMonth);
+      int day = ummalquraCalendar.get(cDay);
+
 
 
 
