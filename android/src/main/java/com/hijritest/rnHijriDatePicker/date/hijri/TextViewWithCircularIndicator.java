@@ -31,10 +31,11 @@ import androidx.annotation.NonNull;
 import androidx.core.content.ContextCompat;
 
 //import androidx.appcompat.widget.AppCompatTextView;
-import com.demo.R;
+import com.hijritest.R;
 
 /**
- * A text view which, when pressed or activated, displays a colored circle around the text.
+ * A text view which, when pressed or activated, displays a colored circle
+ * around the text.
  */
 public class TextViewWithCircularIndicator extends androidx.appcompat.widget.AppCompatTextView {
 
@@ -71,18 +72,20 @@ public class TextViewWithCircularIndicator extends androidx.appcompat.widget.App
     }
 
     /**
-     * Programmatically set the color state list (see mdtp_date_picker_year_selector)
+     * Programmatically set the color state list (see
+     * mdtp_date_picker_year_selector)
+     * 
      * @param accentColor pressed state text color
-     * @param darkMode current theme mode
+     * @param darkMode    current theme mode
      * @return ColorStateList with pressed state
      */
     private ColorStateList createTextColor(int accentColor, boolean darkMode) {
-        int[][] states = new int[][]{
-                new int[]{android.R.attr.state_pressed}, // pressed
-                new int[]{android.R.attr.state_selected}, // selected
-                new int[]{}
+        int[][] states = new int[][] {
+                new int[] { android.R.attr.state_pressed }, // pressed
+                new int[] { android.R.attr.state_selected }, // selected
+                new int[] {}
         };
-        int[] colors = new int[]{
+        int[] colors = new int[] {
                 accentColor,
                 Color.WHITE,
                 darkMode ? Color.WHITE : Color.BLACK

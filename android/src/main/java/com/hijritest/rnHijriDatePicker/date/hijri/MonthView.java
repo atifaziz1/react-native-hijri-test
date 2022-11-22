@@ -39,11 +39,11 @@ import androidx.core.view.ViewCompat;
 import androidx.core.view.accessibility.AccessibilityNodeInfoCompat;
 import androidx.customview.widget.ExploreByTouchHelper;
 
-import com.demo.rnHijriDatePicker.TypefaceHelper;
+import com.hijritest.rnHijriDatePicker.TypefaceHelper;
 //import com.alrajhiretailapp.rnHijriDatePicker.calendar.UmmalquraCalendar;
 import com.github.msarhan.ummalqura.calendar.UmmalquraCalendar;
-import com.demo.R;
-import com.demo.rnHijriDatePicker.date.hijri.MonthAdapter.CalendarDay;
+import com.hijritest.R;
+import com.hijritest.rnHijriDatePicker.date.hijri.MonthAdapter.CalendarDay;
 
 import java.security.InvalidParameterException;
 import java.text.SimpleDateFormat;
@@ -54,7 +54,8 @@ import java.util.List;
 import java.util.Locale;
 
 /**
- * A calendar-like view displaying a specified month and the appropriate selectable day numbers
+ * A calendar-like view displaying a specified month and the appropriate
+ * selectable day numbers
  * within the specified month.
  */
 public abstract class MonthView extends View {
@@ -78,7 +79,8 @@ public abstract class MonthView extends View {
      */
     public static final String VIEW_PARAMS_YEAR = "year";
     /**
-     * This sets one of the days in this view as selected {@link UmmalquraCalendar#SUNDAY}
+     * This sets one of the days in this view as selected
+     * {@link UmmalquraCalendar#SUNDAY}
      * through {@link UmmalquraCalendar#SATURDAY}.
      */
     public static final String VIEW_PARAMS_SELECTED_DAY = "selected_day";
@@ -93,7 +95,8 @@ public abstract class MonthView extends View {
      */
     public static final String VIEW_PARAMS_NUM_DAYS = "num_days";
     /**
-     * Which month is currently in focus, as defined by {@link UmmalquraCalendar#MONTH}
+     * Which month is currently in focus, as defined by
+     * {@link UmmalquraCalendar#MONTH}
      * [0-11].
      */
     public static final String VIEW_PARAMS_FOCUS_MONTH = "focus_month";
@@ -211,7 +214,8 @@ public abstract class MonthView extends View {
             mDayTextColor = ContextCompat.getColor(context, R.color.mdtp_date_picker_text_normal_dark_theme);
             mMonthDayTextColor = ContextCompat.getColor(context, R.color.mdtp_date_picker_month_day_dark_theme);
             mDisabledDayTextColor = ContextCompat.getColor(context, R.color.mdtp_date_picker_text_disabled_dark_theme);
-            mHighlightedDayTextColor = ContextCompat.getColor(context, R.color.mdtp_date_picker_text_highlighted_dark_theme);
+            mHighlightedDayTextColor = ContextCompat.getColor(context,
+                    R.color.mdtp_date_picker_text_highlighted_dark_theme);
         } else {
             mDayTextColor = ContextCompat.getColor(context, R.color.mdtp_date_picker_text_normal);
             mMonthDayTextColor = ContextCompat.getColor(context, R.color.mdtp_date_picker_month_day);
@@ -370,8 +374,8 @@ public abstract class MonthView extends View {
         mYear = params.get(VIEW_PARAMS_YEAR);
 
         // Figure out what day today is
-        //final Time today = new Time(Time.getCurrentTimezone());
-        //today.setToNow();
+        // final Time today = new Time(Time.getCurrentTimezone());
+        // today.setToNow();
         final UmmalquraCalendar today = new UmmalquraCalendar(mController.getTimeZone(), mController.getLocale());
         mHasToday = false;
         mToday = -1;
@@ -386,9 +390,10 @@ public abstract class MonthView extends View {
         } else {
             mWeekStart = mCalendar.getFirstDayOfWeek();
         }
-        mNumCells = UmmalquraCalendar.lengthOfMonth(mCalendar.get(UmmalquraCalendar.YEAR), mCalendar.get(UmmalquraCalendar.MONTH));
+        mNumCells = UmmalquraCalendar.lengthOfMonth(mCalendar.get(UmmalquraCalendar.YEAR),
+                mCalendar.get(UmmalquraCalendar.MONTH));
 
-//        mNumCells = mCalendar.getActualMaximum(UmmalquraCalendar.DAY_OF_MONTH);
+        // mNumCells = mCalendar.getActualMaximum(UmmalquraCalendar.DAY_OF_MONTH);
         for (int i = 0; i < mNumCells; i++) {
             final int day = i + 1;
             if (sameDay(day, today)) {
@@ -460,7 +465,8 @@ public abstract class MonthView extends View {
 
         if (Build.VERSION.SDK_INT < 18)
             pattern = getContext().getResources().getString(R.string.mdtp_date_v1_monthyear);
-        else pattern = DateFormat.getBestDateTimePattern(locale, pattern);
+        else
+            pattern = DateFormat.getBestDateTimePattern(locale, pattern);
 
         SimpleDateFormat formatter = new SimpleDateFormat(pattern, locale);
         formatter.setTimeZone(mController.getTimeZone());
@@ -521,7 +527,8 @@ public abstract class MonthView extends View {
     }
 
     /**
-     * This method should draw the month day.  Implemented by sub-classes to allow customization.
+     * This method should draw the month day. Implemented by sub-classes to allow
+     * customization.
      *
      * @param canvas The canvas to draw on
      * @param year   The year of this month day
@@ -535,13 +542,12 @@ public abstract class MonthView extends View {
      * @param stopY  The bottom boundary of the day number rect
      */
     public abstract void drawMonthDay(Canvas canvas, int year, int month, int day,
-                                      int x, int y, int startX, int stopX, int startY, int stopY);
+            int x, int y, int startX, int stopX, int startY, int stopY);
 
     protected int findDayOffset() {
         return (mDayOfWeekStart < mWeekStart ? (mDayOfWeekStart + mNumDays) : mDayOfWeekStart)
                 - mWeekStart;
     }
-
 
     /**
      * Calculates the day that the given x position is in, accounting for week
@@ -583,16 +589,17 @@ public abstract class MonthView extends View {
      * Called when the user clicks on a day. Handles callbacks to the
      * {@link OnDayClickListener} if one is set.
      * <p/>
-     * If the day is out of the range set by minDate and/or maxDate, this is a no-op.
+     * If the day is out of the range set by minDate and/or maxDate, this is a
+     * no-op.
      *
      * @param day The day that was clicked
      */
     private void onDayClick(int day) {
-        // If the min / max date are set, only process the click if it's a valid selection.
+        // If the min / max date are set, only process the click if it's a valid
+        // selection.
         if (mController.isOutOfRange(mYear, mMonth, day)) {
             return;
         }
-
 
         if (mOnDayClickListener != null) {
             mOnDayClickListener.onDayClick(this, new CalendarDay(mYear, mMonth, day));
@@ -627,7 +634,8 @@ public abstract class MonthView extends View {
             String dayLabel = dayName.toUpperCase(locale).substring(0, 1);
 
             // Chinese labels should be fetched right to left
-            if (locale.equals(Locale.CHINA) || locale.equals(Locale.CHINESE) || locale.equals(Locale.SIMPLIFIED_CHINESE) || locale.equals(Locale.TRADITIONAL_CHINESE)) {
+            if (locale.equals(Locale.CHINA) || locale.equals(Locale.CHINESE) || locale.equals(Locale.SIMPLIFIED_CHINESE)
+                    || locale.equals(Locale.TRADITIONAL_CHINESE)) {
                 int len = dayName.length();
                 dayLabel = dayName.substring(len - 1, len);
             }
@@ -649,7 +657,8 @@ public abstract class MonthView extends View {
                 dayLabel = dayName.toLowerCase().substring(0, 2);
 
             // Correct single character label in Spanish is X
-            if (locale.getLanguage().equals("es") && day.get(UmmalquraCalendar.DAY_OF_WEEK) == UmmalquraCalendar.WEDNESDAY)
+            if (locale.getLanguage().equals("es")
+                    && day.get(UmmalquraCalendar.DAY_OF_WEEK) == UmmalquraCalendar.WEDNESDAY)
                 dayLabel = "X";
 
             return dayLabel;
@@ -660,7 +669,7 @@ public abstract class MonthView extends View {
 
     /**
      * @return The date that has accessibility focus, or {@code null} if no date
-     * has focus
+     *         has focus
      */
     public CalendarDay getAccessibilityFocus() {
         final int day = mTouchHelper.getFocusedVirtualView();
@@ -683,7 +692,7 @@ public abstract class MonthView extends View {
      *
      * @param day The date which should receive focus
      * @return {@code false} if the date is not valid for this month view, or
-     * {@code true} if the date received focus
+     *         {@code true} if the date received focus
      */
     public boolean restoreAccessibilityFocus(CalendarDay day) {
         if ((day.year != mYear) || (day.month != mMonth) || (day.day > mNumCells)) {
@@ -701,7 +710,8 @@ public abstract class MonthView extends View {
         private static final String DATE_FORMAT = "dd MMMM yyyy";
 
         private final Rect mTempRect = new Rect();
-        private final UmmalquraCalendar mTempCalendar = new UmmalquraCalendar(mController.getTimeZone(), mController.getLocale());
+        private final UmmalquraCalendar mTempCalendar = new UmmalquraCalendar(mController.getTimeZone(),
+                mController.getLocale());
 
         public MonthViewTouchHelper(View host) {
             super(host);
@@ -745,7 +755,7 @@ public abstract class MonthView extends View {
 
         @Override
         protected void onPopulateNodeForVirtualView(int virtualViewId,
-                                                    AccessibilityNodeInfoCompat node) {
+                AccessibilityNodeInfoCompat node) {
             getItemBounds(virtualViewId, mTempRect);
 
             node.setContentDescription(getItemDescription(virtualViewId));
@@ -760,7 +770,7 @@ public abstract class MonthView extends View {
 
         @Override
         protected boolean onPerformActionForVirtualView(int virtualViewId, int action,
-                                                        Bundle arguments) {
+                Bundle arguments) {
             switch (action) {
                 case AccessibilityNodeInfo.ACTION_CLICK:
                     onDayClick(virtualViewId);

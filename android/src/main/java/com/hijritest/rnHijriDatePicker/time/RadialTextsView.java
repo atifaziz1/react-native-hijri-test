@@ -32,7 +32,7 @@ import android.view.View;
 
 import androidx.core.content.ContextCompat;
 
-import com.demo.R;
+import com.hijritest.R;
 
 /**
  * A view to show a series of numbers in a circular pattern.
@@ -88,7 +88,7 @@ public class RadialTextsView extends View {
     }
 
     public void initialize(Context context, String[] texts, String[] innerTexts,
-                           TimePickerController controller, SelectionValidator validator, boolean disappearsOut) {
+            TimePickerController controller, SelectionValidator validator, boolean disappearsOut) {
         if (mIsInitialized) {
             Log.e(TAG, "This RadialTextsView may only be initialized once.");
             return;
@@ -130,11 +130,11 @@ public class RadialTextsView extends View {
         } else {
             mCircleRadiusMultiplier = Float.parseFloat(
                     res.getString(R.string.mdtp_circle_radius_multiplier));
-            mAmPmCircleRadiusMultiplier =
-                    Float.parseFloat(res.getString(R.string.mdtp_ampm_circle_radius_multiplier));
+            mAmPmCircleRadiusMultiplier = Float.parseFloat(res.getString(R.string.mdtp_ampm_circle_radius_multiplier));
         }
 
-        // Initialize the widths and heights of the grid, and calculate the values for the numbers.
+        // Initialize the widths and heights of the grid, and calculate the values for
+        // the numbers.
         mTextGridHeights = new float[7];
         mTextGridWidths = new float[7];
         if (mHasInnerCircle) {
@@ -157,8 +157,8 @@ public class RadialTextsView extends View {
         }
 
         mAnimationRadiusMultiplier = 1;
-        mTransitionMidRadiusMultiplier = 1f + (0.05f * (disappearsOut? -1 : 1));
-        mTransitionEndRadiusMultiplier = 1f + (0.3f * (disappearsOut? 1 : -1));
+        mTransitionMidRadiusMultiplier = 1f + (0.05f * (disappearsOut ? -1 : 1));
+        mTransitionEndRadiusMultiplier = 1f + (0.3f * (disappearsOut ? 1 : -1));
         mInvalidateUpdateListener = new InvalidateUpdateListener();
 
         mValidator = validator;
@@ -168,7 +168,9 @@ public class RadialTextsView extends View {
     }
 
     /**
-     * Set the value of the selected text. Depending on the theme this will be rendered differently
+     * Set the value of the selected text. Depending on the theme this will be
+     * rendered differently
+     * 
      * @param selection The text which is currently selected
      */
     protected void setSelection(int selection) {
@@ -208,7 +210,7 @@ public class RadialTextsView extends View {
                 // a slightly higher center. To keep the entire view centered vertically, we'll
                 // have to push it up by half the radius of the AM/PM circles.
                 float amPmCircleRadius = mCircleRadius * mAmPmCircleRadiusMultiplier;
-                mYCenter -= amPmCircleRadius *0.75;
+                mYCenter -= amPmCircleRadius * 0.75;
             }
 
             mTextSize = mCircleRadius * mTextSizeMultiplier;
@@ -223,18 +225,17 @@ public class RadialTextsView extends View {
             mDrawValuesReady = true;
         }
 
-        // Calculate the text positions, but only if they've changed since the last onDraw.
+        // Calculate the text positions, but only if they've changed since the last
+        // onDraw.
         if (mTextGridValuesDirty) {
-            float numbersRadius =
-                    mCircleRadius * mNumbersRadiusMultiplier * mAnimationRadiusMultiplier;
+            float numbersRadius = mCircleRadius * mNumbersRadiusMultiplier * mAnimationRadiusMultiplier;
 
             // Calculate the positions for the 12 numbers in the main circle.
             calculateGridSizes(numbersRadius, mXCenter, mYCenter,
                     mTextSize, mTextGridHeights, mTextGridWidths);
             if (mHasInnerCircle) {
                 // If we have an inner circle, calculate those positions too.
-                float innerNumbersRadius =
-                        mCircleRadius * mInnerNumbersRadiusMultiplier * mAnimationRadiusMultiplier;
+                float innerNumbersRadius = mCircleRadius * mInnerNumbersRadiusMultiplier * mAnimationRadiusMultiplier;
                 calculateGridSizes(innerNumbersRadius, mXCenter, mYCenter,
                         mInnerTextSize, mInnerTextGridHeights, mInnerTextGridWidths);
             }
@@ -250,14 +251,17 @@ public class RadialTextsView extends View {
     }
 
     /**
-     * Using the trigonometric Unit Circle, calculate the positions that the text will need to be
-     * drawn at based on the specified circle radius. Place the values in the textGridHeights and
+     * Using the trigonometric Unit Circle, calculate the positions that the text
+     * will need to be
+     * drawn at based on the specified circle radius. Place the values in the
+     * textGridHeights and
      * textGridWidths parameters.
      */
     private void calculateGridSizes(float numbersRadius, float xCenter, float yCenter,
             float textSize, float[] textGridHeights, float[] textGridWidths) {
         /*
-         * The numbers need to be drawn in a 7x7 grid, representing the points on the Unit Circle.
+         * The numbers need to be drawn in a 7x7 grid, representing the points on the
+         * Unit Circle.
          */
         float offset1 = numbersRadius;
         // cos(30) = a / r => r * cos(30) = a => r * √3/2 = a
@@ -288,17 +292,21 @@ public class RadialTextsView extends View {
 
     private Paint[] assignTextColors(String[] texts) {
         Paint[] paints = new Paint[texts.length];
-        for(int i=0;i<texts.length;i++) {
+        for (int i = 0; i < texts.length; i++) {
             int text = Integer.parseInt(texts[i]);
-            if(text == selection) paints[i] = mSelectedPaint;
-            else if(mValidator.isValidSelection(text)) paints[i] = mPaint;
-            else paints[i] = mInactivePaint;
+            if (text == selection)
+                paints[i] = mSelectedPaint;
+            else if (mValidator.isValidSelection(text))
+                paints[i] = mPaint;
+            else
+                paints[i] = mInactivePaint;
         }
         return paints;
     }
 
     /**
-     * Draw the 12 text values at the positions specified by the textGrid parameters.
+     * Draw the 12 text values at the positions specified by the textGrid
+     * parameters.
      */
     private void drawTexts(Canvas canvas, float textSize, Typeface typeface, String[] texts,
             float[] textGridWidths, float[] textGridHeights) {
@@ -341,7 +349,6 @@ public class RadialTextsView extends View {
         mDisappearAnimator = ObjectAnimator.ofPropertyValuesHolder(
                 this, radiusDisappear, fadeOut).setDuration(duration);
         mDisappearAnimator.addUpdateListener(mInvalidateUpdateListener);
-
 
         // Set up animator for reappearing.
         float delayMultiplier = 0.25f;

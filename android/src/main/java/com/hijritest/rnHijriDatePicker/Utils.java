@@ -36,7 +36,8 @@ import androidx.core.content.ContextCompat;
  */
 public class Utils {
 
-    //public static final int MONDAY_BEFORE_JULIAN_EPOCH = Time.EPOCH_JULIAN_DAY - 3;
+    // public static final int MONDAY_BEFORE_JULIAN_EPOCH = Time.EPOCH_JULIAN_DAY -
+    // 3;
     public static final int PULSE_ANIMATOR_DURATION = 544;
 
     // Alpha level for time picker selection.
@@ -46,11 +47,13 @@ public class Utils {
     public static final int FULL_ALPHA = 255;
 
     public static boolean isJellybeanOrLater() {
-      return Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN;
+        return Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN;
     }
 
     /**
-     * Try to speak the specified text, for accessibility. Only available on JB or later.
+     * Try to speak the specified text, for accessibility. Only available on JB or
+     * later.
+     * 
      * @param text Text to announce.
      */
     @SuppressLint("NewApi")
@@ -72,9 +75,9 @@ public class Utils {
      * @return The julian day for the Monday of the given week since the epoch
      */
     /**
-    public static int getJulianMondayFromWeeksSinceEpoch(int week) {
-        return MONDAY_BEFORE_JULIAN_EPOCH + week * 7;
-    }
+     * public static int getJulianMondayFromWeeksSinceEpoch(int week) {
+     * return MONDAY_BEFORE_JULIAN_EPOCH + week * 7;
+     * }
      */
 
     /**
@@ -85,24 +88,26 @@ public class Utils {
      * week since {@link Time#EPOCH_JULIAN_DAY} that day occurs in, starting
      * at 0. *Do not* use this to compute the ISO week number for the year.
      *
-     * @param julianDay The julian day to calculate the week number for
+     * @param julianDay      The julian day to calculate the week number for
      * @param firstDayOfWeek Which week day is the first day of the week,
-     *          see {@link Time#SUNDAY}
+     *                       see {@link Time#SUNDAY}
      * @return Weeks since the epoch
      */
     /**
-    public static int getWeeksSinceEpochFromJulianDay(int julianDay, int firstDayOfWeek) {
-        int diff = Time.THURSDAY - firstDayOfWeek;
-        if (diff < 0) {
-            diff += 7;
-        }
-        int refDay = Time.EPOCH_JULIAN_DAY - diff;
-        return (julianDay - refDay) / 7;
-    }
+     * public static int getWeeksSinceEpochFromJulianDay(int julianDay, int
+     * firstDayOfWeek) {
+     * int diff = Time.THURSDAY - firstDayOfWeek;
+     * if (diff < 0) {
+     * diff += 7;
+     * }
+     * int refDay = Time.EPOCH_JULIAN_DAY - diff;
+     * return (julianDay - refDay) / 7;
+     * }
      */
 
     /**
      * Render an animator to pulsate a view in place.
+     * 
      * @param labelToAnimate the view to pulsate.
      * @return The animator object. Use .start() to begin.
      */
@@ -115,8 +120,7 @@ public class Utils {
 
         PropertyValuesHolder scaleX = PropertyValuesHolder.ofKeyframe("scaleX", k0, k1, k2, k3);
         PropertyValuesHolder scaleY = PropertyValuesHolder.ofKeyframe("scaleY", k0, k1, k2, k3);
-        ObjectAnimator pulseAnimator =
-                ObjectAnimator.ofPropertyValuesHolder(labelToAnimate, scaleX, scaleY);
+        ObjectAnimator pulseAnimator = ObjectAnimator.ofPropertyValuesHolder(labelToAnimate, scaleX, scaleY);
         pulseAnimator.setDuration(PULSE_ANIMATOR_DURATION);
 
         return pulseAnimator;
@@ -126,7 +130,7 @@ public class Utils {
      * Convert Dp to Pixel
      */
     @SuppressWarnings("unused")
-    public static int dpToPx(float dp, Resources resources){
+    public static int dpToPx(float dp, Resources resources) {
         float px = TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, dp, resources.getDisplayMetrics());
         return (int) px;
     }
@@ -140,6 +144,7 @@ public class Utils {
 
     /**
      * Gets the colorAccent from the current context, if possible/available
+     * 
      * @param context The context to use as reference for the color
      * @return the accent color of the current context
      */
@@ -156,28 +161,31 @@ public class Utils {
             return typedValue.data;
         }
         // Return the value in mdtp_accent_color
-        return ContextCompat.getColor(context, com.demo.R.color.mdtp_accent_color);
+        return ContextCompat.getColor(context, com.hijritest.R.color.mdtp_accent_color);
     }
 
     /**
      * Gets dialog type (Light/Dark) from current theme
+     * 
      * @param context The context to use as reference for the boolean
      * @param current Default value to return if cannot resolve the attribute
      * @return true if dark mode, false if light.
      */
     public static boolean isDarkTheme(Context context, boolean current) {
-        return resolveBoolean(context, com.demo.R.attr.mdtp_theme_dark, current);
+        return resolveBoolean(context, com.hijritest.R.attr.mdtp_theme_dark, current);
     }
 
     /**
-     * Gets the required boolean value from the current context, if possible/available
-     * @param context The context to use as reference for the boolean
-     * @param attr Attribute id to resolve
+     * Gets the required boolean value from the current context, if
+     * possible/available
+     * 
+     * @param context  The context to use as reference for the boolean
+     * @param attr     Attribute id to resolve
      * @param fallback Default value to return if no value is specified in theme
      * @return the boolean value from current theme
      */
     private static boolean resolveBoolean(Context context, @AttrRes int attr, boolean fallback) {
-        TypedArray a = context.getTheme().obtainStyledAttributes(new int[]{attr});
+        TypedArray a = context.getTheme().obtainStyledAttributes(new int[] { attr });
         try {
             return a.getBoolean(0, fallback);
         } finally {

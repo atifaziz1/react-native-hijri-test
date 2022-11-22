@@ -23,7 +23,7 @@ import android.view.ViewGroup;
 import android.widget.AbsListView.LayoutParams;
 import android.widget.BaseAdapter;
 
-import com.demo.rnHijriDatePicker.date.gregorian.MonthView.OnDayClickListener;
+import com.hijritest.rnHijriDatePicker.date.gregorian.MonthView.OnDayClickListener;
 
 import java.util.Calendar;
 import java.util.HashMap;
@@ -147,7 +147,8 @@ public abstract class MonthAdapter extends BaseAdapter implements OnDayClickList
         int endMonth = endDate.get(Calendar.YEAR) * MONTHS_IN_YEAR + endDate.get(Calendar.MONTH);
         int startMonth = startDate.get(Calendar.YEAR) * MONTHS_IN_YEAR + startDate.get(Calendar.MONTH);
         return endMonth - startMonth + 1;
-        //return ((mController.getMaxYear() - mController.getMinYear()) + 1) * MONTHS_IN_YEAR;
+        // return ((mController.getMaxYear() - mController.getMinYear()) + 1) *
+        // MONTHS_IN_YEAR;
     }
 
     @Override
@@ -190,14 +191,16 @@ public abstract class MonthAdapter extends BaseAdapter implements OnDayClickList
         drawingParams.clear();
 
         final int month = (position + mController.getStartDate().get(Calendar.MONTH)) % MONTHS_IN_YEAR;
-        final int year = (position + mController.getStartDate().get(Calendar.MONTH)) / MONTHS_IN_YEAR + mController.getMinYear();
+        final int year = (position + mController.getStartDate().get(Calendar.MONTH)) / MONTHS_IN_YEAR
+                + mController.getMinYear();
 
         int selectedDay = -1;
         if (isSelectedDayInMonth(year, month)) {
             selectedDay = mSelectedDay.day;
         }
 
-        // Invokes requestLayout() to ensure that the recycled view is set with the appropriate
+        // Invokes requestLayout() to ensure that the recycled view is set with the
+        // appropriate
         // height/number of weeks before being displayed.
         v.reuse();
 
@@ -215,7 +218,6 @@ public abstract class MonthAdapter extends BaseAdapter implements OnDayClickList
     private boolean isSelectedDayInMonth(int year, int month) {
         return mSelectedDay.year == year && mSelectedDay.month == month;
     }
-
 
     @Override
     public void onDayClick(MonthView view, CalendarDay day) {

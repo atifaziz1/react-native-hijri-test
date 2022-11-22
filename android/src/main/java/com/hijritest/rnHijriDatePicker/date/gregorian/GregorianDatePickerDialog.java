@@ -45,11 +45,11 @@ import androidx.annotation.StringRes;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.DialogFragment;
 
-import com.demo.rnHijriDatePicker.HapticFeedbackController;
-import com.demo.rnHijriDatePicker.TypefaceHelper;
-import com.demo.rnHijriDatePicker.Utils;
+import com.hijritest.rnHijriDatePicker.HapticFeedbackController;
+import com.hijritest.rnHijriDatePicker.TypefaceHelper;
+import com.hijritest.rnHijriDatePicker.Utils;
 
-import com.demo.R;
+import com.hijritest.R;
 
 import java.text.SimpleDateFormat;
 import java.util.Arrays;
@@ -104,7 +104,6 @@ public class GregorianDatePickerDialog extends DialogFragment implements
     private static final String KEY_CANCEL_COLOR = "cancel_color";
     private static final String KEY_VERSION = "version";
     private static final String KEY_TIMEZONE = "timezone";
-
 
     private static final int DEFAULT_START_YEAR = 1900;
     private static final int DEFAULT_END_YEAR = 2100;
@@ -187,13 +186,13 @@ public class GregorianDatePickerDialog extends DialogFragment implements
     }
 
     /**
-     * The callback used to notify other date picker components of a change in selected date.
+     * The callback used to notify other date picker components of a change in
+     * selected date.
      */
     interface OnDateChangedListener {
 
         void onDateChanged();
     }
-
 
     public GregorianDatePickerDialog() {
         // Empty constructor required for dialog fragment.
@@ -206,8 +205,8 @@ public class GregorianDatePickerDialog extends DialogFragment implements
      * @param dayOfMonth  The initial day of the dialog.
      */
     public static GregorianDatePickerDialog newInstance(OnDateSetListener callBack, int year,
-                                                        int monthOfYear,
-                                                        int dayOfMonth) {
+            int monthOfYear,
+            int dayOfMonth) {
         GregorianDatePickerDialog ret = new GregorianDatePickerDialog();
         ret.initialize(callBack, year, monthOfYear, dayOfMonth);
         return ret;
@@ -237,7 +236,8 @@ public class GregorianDatePickerDialog extends DialogFragment implements
             mDefaultView = savedInstanceState.getInt(KEY_DEFAULT_VIEW);
         }
         if (Build.VERSION.SDK_INT < 18) {
-            VERSION_2_FORMAT = new SimpleDateFormat(activity.getResources().getString(R.string.mdtp_date_v2_daymonthyear), mLocale);
+            VERSION_2_FORMAT = new SimpleDateFormat(
+                    activity.getResources().getString(R.string.mdtp_date_v2_daymonthyear), mLocale);
         } else {
             VERSION_2_FORMAT = new SimpleDateFormat(DateFormat.getBestDateTimePattern(mLocale, "EEEMMMdd"), mLocale);
         }
@@ -287,7 +287,7 @@ public class GregorianDatePickerDialog extends DialogFragment implements
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
+            Bundle savedInstanceState) {
         int listPosition = -1;
         int listPositionOffset = 0;
         int currentView = mDefaultView;
@@ -320,9 +320,11 @@ public class GregorianDatePickerDialog extends DialogFragment implements
             mTimezone = (TimeZone) savedInstanceState.getSerializable(KEY_TIMEZONE);
         }
 
-        int viewRes = mVersion == Version.VERSION_1 ? R.layout.hdp_mdtp_date_picker_dialog : R.layout.hdp_mdtp_date_picker_dialog_v2;
+        int viewRes = mVersion == Version.VERSION_1 ? R.layout.hdp_mdtp_date_picker_dialog
+                : R.layout.hdp_mdtp_date_picker_dialog_v2;
         View view = inflater.inflate(viewRes, container, false);
-        // All options have been set at this point: round the initial selection if necessary
+        // All options have been set at this point: round the initial selection if
+        // necessary
         setToNearestDate(mCalendar);
 
         mDatePickerHeaderView = view.findViewById(R.id.mdtp_date_picker_header);
@@ -337,7 +339,8 @@ public class GregorianDatePickerDialog extends DialogFragment implements
         mDayPickerView = new SimpleDayPickerView(activity, this);
         mYearPickerView = new YearPickerView(activity, this);
 
-        // if theme mode has not been set by java code, check if it is specified in Style.xml
+        // if theme mode has not been set by java code, check if it is specified in
+        // Style.xml
         if (!mThemeDarkChanged) {
             mThemeDark = Utils.isDarkTheme(activity, mThemeDark);
         }
@@ -348,7 +351,8 @@ public class GregorianDatePickerDialog extends DialogFragment implements
         mYearPickerDescription = res.getString(R.string.mdtp_year_picker_description);
         mSelectYear = res.getString(R.string.mdtp_select_year);
 
-        int bgColorResource = mThemeDark ? R.color.mdtp_date_picker_view_animator_dark_theme : R.color.mdtp_date_picker_view_animator;
+        int bgColorResource = mThemeDark ? R.color.mdtp_date_picker_view_animator_dark_theme
+                : R.color.mdtp_date_picker_view_animator;
         view.setBackgroundColor(ContextCompat.getColor(activity, bgColorResource));
 
         mAnimator = view.findViewById(R.id.mdtp_animator);
@@ -375,20 +379,25 @@ public class GregorianDatePickerDialog extends DialogFragment implements
             }
         });
         okButton.setTypeface(TypefaceHelper.get(activity, "Roboto-Medium"));
-        if (mOkString != null) okButton.setText(mOkString);
-        else okButton.setText(mOkResid);
+        if (mOkString != null)
+            okButton.setText(mOkString);
+        else
+            okButton.setText(mOkResid);
 
         Button cancelButton = view.findViewById(R.id.mdtp_cancel);
         cancelButton.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
                 tryVibrate();
-                if (getDialog() != null) getDialog().cancel();
+                if (getDialog() != null)
+                    getDialog().cancel();
             }
         });
         cancelButton.setTypeface(TypefaceHelper.get(activity, "Roboto-Medium"));
-        if (mCancelString != null) cancelButton.setText(mCancelString);
-        else cancelButton.setText(mCancelResid);
+        if (mCancelString != null)
+            cancelButton.setText(mCancelString);
+        else
+            cancelButton.setText(mCancelResid);
         cancelButton.setVisibility(isCancelable() ? View.VISIBLE : View.GONE);
 
         // If an accent color has not been set manually, get it from the context
@@ -400,10 +409,14 @@ public class GregorianDatePickerDialog extends DialogFragment implements
         view.findViewById(R.id.mdtp_day_picker_selected_date_layout).setBackgroundColor(mAccentColor);
 
         // Buttons can have a different color
-        if (mOkColor != -1) okButton.setTextColor(mOkColor);
-        else okButton.setTextColor(mAccentColor);
-        if (mCancelColor != -1) cancelButton.setTextColor(mCancelColor);
-        else cancelButton.setTextColor(mAccentColor);
+        if (mOkColor != -1)
+            okButton.setTextColor(mOkColor);
+        else
+            okButton.setTextColor(mAccentColor);
+        if (mCancelColor != -1)
+            cancelButton.setTextColor(mCancelColor);
+        else
+            cancelButton.setTextColor(mAccentColor);
 
         if (getDialog() == null) {
             view.findViewById(R.id.mdtp_done_background).setVisibility(View.GONE);
@@ -452,19 +465,22 @@ public class GregorianDatePickerDialog extends DialogFragment implements
     public void onPause() {
         super.onPause();
         mHapticFeedbackController.stop();
-        if (mDismissOnPause) dismiss();
+        if (mDismissOnPause)
+            dismiss();
     }
 
     @Override
     public void onCancel(DialogInterface dialog) {
         super.onCancel(dialog);
-        if (mOnCancelListener != null) mOnCancelListener.onCancel(dialog);
+        if (mOnCancelListener != null)
+            mOnCancelListener.onCancel(dialog);
     }
 
     @Override
     public void onDismiss(DialogInterface dialog) {
         super.onDismiss(dialog);
-        if (mOnDismissListener != null) mOnDismissListener.onDismiss(dialog);
+        if (mOnDismissListener != null)
+            mOnDismissListener.onDismiss(dialog);
     }
 
     private void setCurrentView(final int viewIndex) {
@@ -546,7 +562,8 @@ public class GregorianDatePickerDialog extends DialogFragment implements
                             getLocale()).toUpperCase(getLocale()));
                 }
             }
-            mSelectedMonthTextView.setText(String.valueOf(mCalendar.getDisplayName(Calendar.MONTH, Calendar.SHORT, getLocale())));
+            mSelectedMonthTextView
+                    .setText(String.valueOf(mCalendar.getDisplayName(Calendar.MONTH, Calendar.SHORT, getLocale())));
             mSelectedDayTextView.setText(String.format(getLocale(), "%2d", mCalendar.get(Calendar.DAY_OF_MONTH)));
         }
 
@@ -582,9 +599,11 @@ public class GregorianDatePickerDialog extends DialogFragment implements
     }
 
     /**
-     * Set whether the picker should dismiss itself when being paused or whether it should try to survive an orientation change
+     * Set whether the picker should dismiss itself when being paused or whether it
+     * should try to survive an orientation change
      *
-     * @param dismissOnPause true if the dialog should dismiss itself when it's pausing
+     * @param dismissOnPause true if the dialog should dismiss itself when it's
+     *                       pausing
      */
     public void dismissOnPause(boolean dismissOnPause) {
         mDismissOnPause = dismissOnPause;
@@ -593,7 +612,8 @@ public class GregorianDatePickerDialog extends DialogFragment implements
     /**
      * Set whether the picker should dismiss itself when a day is selected
      *
-     * @param autoDismiss true if the dialog should dismiss itself when a day is selected
+     * @param autoDismiss true if the dialog should dismiss itself when a day is
+     *                    selected
      */
     @SuppressWarnings("unused")
     public void autoDismiss(boolean autoDismiss) {
@@ -603,7 +623,8 @@ public class GregorianDatePickerDialog extends DialogFragment implements
     /**
      * Set whether the dark theme should be used
      *
-     * @param themeDark true if the dark theme should be used, false if the default theme should be used
+     * @param themeDark true if the dark theme should be used, false if the default
+     *                  theme should be used
      */
     public void setThemeDark(boolean themeDark) {
         mThemeDark = themeDark;
@@ -613,7 +634,8 @@ public class GregorianDatePickerDialog extends DialogFragment implements
     /**
      * Returns true when the dark theme should be used
      *
-     * @return true if the dark theme should be used, false if the default theme should be used
+     * @return true if the dark theme should be used, false if the default theme
+     *         should be used
      */
     @Override
     public boolean isThemeDark() {
@@ -724,10 +746,12 @@ public class GregorianDatePickerDialog extends DialogFragment implements
     }
 
     /**
-     * Sets the minimal date supported by this DatePicker. Dates before (but not including) the
+     * Sets the minimal date supported by this DatePicker. Dates before (but not
+     * including) the
      * specified date will be disallowed from being selected.
      *
-     * @param calendar a Calendar object set to the year, month, day desired as the mindate.
+     * @param calendar a Calendar object set to the year, month, day desired as the
+     *                 mindate.
      */
     @SuppressWarnings("unused")
     public void setMinDate(Calendar calendar) {
@@ -739,7 +763,8 @@ public class GregorianDatePickerDialog extends DialogFragment implements
     }
 
     /**
-     * @return The minimal date supported by this DatePicker. Null if it has not been set.
+     * @return The minimal date supported by this DatePicker. Null if it has not
+     *         been set.
      */
     @SuppressWarnings("unused")
     public Calendar getMinDate() {
@@ -747,10 +772,12 @@ public class GregorianDatePickerDialog extends DialogFragment implements
     }
 
     /**
-     * Sets the minimal date supported by this DatePicker. Dates after (but not including) the
+     * Sets the minimal date supported by this DatePicker. Dates after (but not
+     * including) the
      * specified date will be disallowed from being selected.
      *
-     * @param calendar a Calendar object set to the year, month, day desired as the maxdate.
+     * @param calendar a Calendar object set to the year, month, day desired as the
+     *                 maxdate.
      */
     @SuppressWarnings("unused")
     public void setMaxDate(Calendar calendar) {
@@ -762,7 +789,8 @@ public class GregorianDatePickerDialog extends DialogFragment implements
     }
 
     /**
-     * @return The maximal date supported by this DatePicker. Null if it has not been set.
+     * @return The maximal date supported by this DatePicker. Null if it has not
+     *         been set.
      */
     @SuppressWarnings("unused")
     public Calendar getMaxDate() {
@@ -772,21 +800,26 @@ public class GregorianDatePickerDialog extends DialogFragment implements
     /**
      * Sets an array of dates which should be highlighted when the picker is drawn
      *
-     * @param highlightedDays an Array of Calendar objects containing the dates to be highlighted
+     * @param highlightedDays an Array of Calendar objects containing the dates to
+     *                        be highlighted
      */
     @SuppressWarnings("unused")
     public void setHighlightedDays(Calendar[] highlightedDays) {
-        for (Calendar highlightedDay : highlightedDays) trimToMidnight(highlightedDay);
+        for (Calendar highlightedDay : highlightedDays)
+            trimToMidnight(highlightedDay);
         this.highlightedDays.addAll(Arrays.asList(highlightedDays));
-        if (mDayPickerView != null) mDayPickerView.onChange();
+        if (mDayPickerView != null)
+            mDayPickerView.onChange();
     }
 
     /**
-     * @return The list of dates, as Calendar Objects, which should be highlighted. null is no dates should be highlighted
+     * @return The list of dates, as Calendar Objects, which should be highlighted.
+     *         null is no dates should be highlighted
      */
     @SuppressWarnings("unused")
     public Calendar[] getHighlightedDays() {
-        if (highlightedDays.isEmpty()) return null;
+        if (highlightedDays.isEmpty())
+            return null;
         Calendar[] output = highlightedDays.toArray(new Calendar[0]);
         Arrays.sort(output);
         return output;
@@ -804,19 +837,24 @@ public class GregorianDatePickerDialog extends DialogFragment implements
 
     /**
      * Sets a list of days which are the only valid selections.
-     * Setting this value will take precedence over using setMinDate() and setMaxDate()
+     * Setting this value will take precedence over using setMinDate() and
+     * setMaxDate()
      *
-     * @param selectableDays an Array of Calendar Objects containing the selectable dates
+     * @param selectableDays an Array of Calendar Objects containing the selectable
+     *                       dates
      */
     @SuppressWarnings("unused")
     public void setSelectableDays(Calendar[] selectableDays) {
-        for (Calendar selectableDay : selectableDays) trimToMidnight(selectableDay);
+        for (Calendar selectableDay : selectableDays)
+            trimToMidnight(selectableDay);
         this.selectableDays.addAll(Arrays.asList(selectableDays));
-        if (mDayPickerView != null) mDayPickerView.onChange();
+        if (mDayPickerView != null)
+            mDayPickerView.onChange();
     }
 
     /**
-     * @return an Array of Calendar objects containing the list with selectable items. null if no restriction is set
+     * @return an Array of Calendar objects containing the list with selectable
+     *         items. null if no restriction is set
      */
     @SuppressWarnings("unused")
     public Calendar[] getSelectableDays() {
@@ -825,23 +863,29 @@ public class GregorianDatePickerDialog extends DialogFragment implements
 
     /**
      * Sets a list of days that are not selectable in the picker
-     * Setting this value will take precedence over using setMinDate() and setMaxDate(), but stacks with setSelectableDays()
+     * Setting this value will take precedence over using setMinDate() and
+     * setMaxDate(), but stacks with setSelectableDays()
      *
-     * @param disabledDays an Array of Calendar Objects containing the disabled dates
+     * @param disabledDays an Array of Calendar Objects containing the disabled
+     *                     dates
      */
     @SuppressWarnings("unused")
     public void setDisabledDays(Calendar[] disabledDays) {
-        for (Calendar disabledDay : disabledDays) trimToMidnight(disabledDay);
+        for (Calendar disabledDay : disabledDays)
+            trimToMidnight(disabledDay);
         this.disabledDays.addAll(Arrays.asList(disabledDays));
-        if (mDayPickerView != null) mDayPickerView.onChange();
+        if (mDayPickerView != null)
+            mDayPickerView.onChange();
     }
 
     /**
-     * @return an Array of Calendar objects containing the list of days that are not selectable. null if no restriction is set
+     * @return an Array of Calendar objects containing the list of days that are not
+     *         selectable. null if no restriction is set
      */
     @SuppressWarnings("unused")
     public Calendar[] getDisabledDays() {
-        if (disabledDays.isEmpty()) return null;
+        if (disabledDays.isEmpty())
+            return null;
         Calendar[] output = disabledDays.toArray(new Calendar[0]);
         Arrays.sort(output);
         return output;
@@ -944,10 +988,12 @@ public class GregorianDatePickerDialog extends DialogFragment implements
         mOnDismissListener = onDismissListener;
     }
 
-    // If the newly selected month / year does not contain the currently selected day number,
+    // If the newly selected month / year does not contain the currently selected
+    // day number,
     // change the selected day number to the last day of the selected month or year.
-    //      e.g. Switching from Mar to Apr when Mar 31 is selected -> Apr 30
-    //      e.g. Switching from 2012 to 2013 when Feb 29, 2012 is selected -> Feb 28, 2013
+    // e.g. Switching from Mar to Apr when Mar 31 is selected -> Apr 30
+    // e.g. Switching from 2012 to 2013 when Feb 29, 2012 is selected -> Feb 28,
+    // 2013
     private void adjustDayInMonthIfNeeded(Calendar calendar) {
         int day = calendar.get(Calendar.DAY_OF_MONTH);
         int daysInMonth = calendar.getActualMaximum(Calendar.DAY_OF_MONTH);
@@ -990,9 +1036,9 @@ public class GregorianDatePickerDialog extends DialogFragment implements
     }
 
     private void updatePickers() {
-        for (OnDateChangedListener listener : mListeners) listener.onDateChanged();
+        for (OnDateChangedListener listener : mListeners)
+            listener.onDateChanged();
     }
-
 
     @Override
     public MonthAdapter.CalendarDay getSelectedDay() {
@@ -1001,8 +1047,10 @@ public class GregorianDatePickerDialog extends DialogFragment implements
 
     @Override
     public Calendar getStartDate() {
-        if (!selectableDays.isEmpty()) return selectableDays.first();
-        if (mMinDate != null) return mMinDate;
+        if (!selectableDays.isEmpty())
+            return selectableDays.first();
+        if (mMinDate != null)
+            return mMinDate;
         Calendar output = Calendar.getInstance(getTimeZone());
         output.set(Calendar.YEAR, mMinYear);
         output.set(Calendar.DAY_OF_MONTH, 1);
@@ -1012,8 +1060,10 @@ public class GregorianDatePickerDialog extends DialogFragment implements
 
     @Override
     public Calendar getEndDate() {
-        if (!selectableDays.isEmpty()) return selectableDays.last();
-        if (mMaxDate != null) return mMaxDate;
+        if (!selectableDays.isEmpty())
+            return selectableDays.last();
+        if (mMaxDate != null)
+            return mMaxDate;
         Calendar output = Calendar.getInstance(getTimeZone());
         output.set(Calendar.YEAR, mMaxYear);
         output.set(Calendar.DAY_OF_MONTH, 31);
@@ -1027,7 +1077,8 @@ public class GregorianDatePickerDialog extends DialogFragment implements
 
     @Override
     public int getMinYear() {
-        if (!selectableDays.isEmpty()) return selectableDays.first().get(Calendar.YEAR);
+        if (!selectableDays.isEmpty())
+            return selectableDays.first().get(Calendar.YEAR);
         // Ensure no years can be selected outside of the given minimum date
         return mMinDate != null && mMinDate.get(Calendar.YEAR) > mMinYear ? mMinDate.get(Calendar.YEAR) : mMinYear;
     }
@@ -1038,15 +1089,18 @@ public class GregorianDatePickerDialog extends DialogFragment implements
 
     @Override
     public int getMaxYear() {
-        if (!selectableDays.isEmpty()) return selectableDays.last().get(Calendar.YEAR);
+        if (!selectableDays.isEmpty())
+            return selectableDays.last().get(Calendar.YEAR);
         // Ensure no years can be selected outside of the given maximum date
         return mMaxDate != null && mMaxDate.get(Calendar.YEAR) < mMaxYear ? mMaxDate.get(Calendar.YEAR) : mMaxYear;
     }
 
     /**
-     * @return true if the specified year/month/day are within the selectable days or the range set by minDate and maxDate.
-     * If one or either have not been set, they are considered as Integer.MIN_VALUE and
-     * Integer.MAX_VALUE.
+     * @return true if the specified year/month/day are within the selectable days
+     *         or the range set by minDate and maxDate.
+     *         If one or either have not been set, they are considered as
+     *         Integer.MIN_VALUE and
+     *         Integer.MAX_VALUE.
      */
     @Override
     public boolean isOutOfRange(int year, int month, int day) {
@@ -1085,8 +1139,10 @@ public class GregorianDatePickerDialog extends DialogFragment implements
             Calendar higher = selectableDays.ceiling(calendar);
             Calendar lower = selectableDays.lower(calendar);
 
-            if (higher == null && lower != null) newCalendar = lower;
-            else if (lower == null && higher != null) newCalendar = higher;
+            if (higher == null && lower != null)
+                newCalendar = lower;
+            else if (lower == null && higher != null)
+                newCalendar = higher;
 
             if (newCalendar != null || higher == null) {
                 newCalendar = newCalendar == null ? calendar : newCalendar;
@@ -1098,8 +1154,10 @@ public class GregorianDatePickerDialog extends DialogFragment implements
             long highDistance = Math.abs(higher.getTimeInMillis() - calendar.getTimeInMillis());
             long lowDistance = Math.abs(calendar.getTimeInMillis() - lower.getTimeInMillis());
 
-            if (lowDistance < highDistance) calendar.setTimeInMillis(lower.getTimeInMillis());
-            else calendar.setTimeInMillis(higher.getTimeInMillis());
+            if (lowDistance < highDistance)
+                calendar.setTimeInMillis(lower.getTimeInMillis());
+            else
+                calendar.setTimeInMillis(higher.getTimeInMillis());
 
             return;
         }
@@ -1120,7 +1178,6 @@ public class GregorianDatePickerDialog extends DialogFragment implements
                 return;
             }
         }
-
 
         if (isBeforeMin(calendar)) {
             calendar.setTimeInMillis(mMinDate.getTimeInMillis());
@@ -1165,7 +1222,8 @@ public class GregorianDatePickerDialog extends DialogFragment implements
 
     @Override
     public void tryVibrate() {
-        if (mVibrate) mHapticFeedbackController.tryVibrate();
+        if (mVibrate)
+            mHapticFeedbackController.tryVibrate();
     }
 
     @Override

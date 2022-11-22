@@ -33,9 +33,9 @@ import android.widget.ListView;
 
 import androidx.annotation.NonNull;
 
-import com.demo.rnHijriDatePicker.Utils;
+import com.hijritest.rnHijriDatePicker.Utils;
 
-import com.demo.rnHijriDatePicker.date.gregorian.GregorianDatePickerDialog.OnDateChangedListener;
+import com.hijritest.rnHijriDatePicker.date.gregorian.GregorianDatePickerDialog.OnDateChangedListener;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -142,7 +142,7 @@ public abstract class DayPickerView extends ListView implements OnScrollListener
     }
 
     public abstract MonthAdapter createMonthAdapter(Context context,
-                                                    DatePickerController controller);
+            DatePickerController controller);
 
     /*
      * Sets all the required fields for the list view. Override this method to
@@ -344,7 +344,8 @@ public abstract class DayPickerView extends ListView implements OnScrollListener
     }
 
     /**
-     * Gets the position of the view that is most prominently displayed within the list view.
+     * Gets the position of the view that is most prominently displayed within the
+     * list view.
      */
     public int getMostVisiblePosition() {
         final int firstPosition = getFirstVisiblePosition();
@@ -379,7 +380,7 @@ public abstract class DayPickerView extends ListView implements OnScrollListener
      * Attempts to return the date that has accessibility focus.
      *
      * @return The date that has accessibility focus, or {@code null} if no date
-     * has focus.
+     *         has focus.
      */
     private MonthAdapter.CalendarDay findAccessibilityFocus() {
         final int childCount = getChildCount();
@@ -454,7 +455,8 @@ public abstract class DayPickerView extends ListView implements OnScrollListener
     }
 
     /**
-     * Necessary for accessibility, to ensure we support "scrolling" forward and backward
+     * Necessary for accessibility, to ensure we support "scrolling" forward and
+     * backward
      * in the month list.
      */
     @Override
@@ -471,7 +473,8 @@ public abstract class DayPickerView extends ListView implements OnScrollListener
     }
 
     /**
-     * When scroll forward/backward events are received, announce the newly scrolled-to month.
+     * When scroll forward/backward events are received, announce the newly
+     * scrolled-to month.
      */
     @SuppressLint("NewApi")
     @Override
@@ -511,7 +514,7 @@ public abstract class DayPickerView extends ListView implements OnScrollListener
         }
 
         // Go to that month.
-        Utils.tryAccessibilityAnnounce(this, getMonthAndYearString(day,mController.getLocale()));
+        Utils.tryAccessibilityAnnounce(this, getMonthAndYearString(day, mController.getLocale()));
         goTo(day, true, false, true);
         mPerformingScroll = true;
         return true;

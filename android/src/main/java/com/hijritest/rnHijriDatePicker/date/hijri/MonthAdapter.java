@@ -26,7 +26,7 @@ import android.widget.BaseAdapter;
 //import com.github.msarhan.ummalqura.calendar.UmmalquraCalendar;
 //import com.alrajhiretailapp.rnHijriDatePicker.calendar.UmmalquraCalendar;
 import com.github.msarhan.ummalqura.calendar.UmmalquraCalendar;
-import com.demo.rnHijriDatePicker.date.hijri.MonthView.OnDayClickListener;
+import com.hijritest.rnHijriDatePicker.date.hijri.MonthView.OnDayClickListener;
 
 import java.util.HashMap;
 import java.util.Locale;
@@ -148,9 +148,11 @@ public abstract class MonthAdapter extends BaseAdapter implements OnDayClickList
         UmmalquraCalendar endDate = mController.getEndDate();
         UmmalquraCalendar startDate = mController.getStartDate();
         int endMonth = endDate.get(UmmalquraCalendar.YEAR) * MONTHS_IN_YEAR + endDate.get(UmmalquraCalendar.MONTH);
-        int startMonth = startDate.get(UmmalquraCalendar.YEAR) * MONTHS_IN_YEAR + startDate.get(UmmalquraCalendar.MONTH);
+        int startMonth = startDate.get(UmmalquraCalendar.YEAR) * MONTHS_IN_YEAR
+                + startDate.get(UmmalquraCalendar.MONTH);
         return endMonth - startMonth + 1;
-        //return ((mController.getMaxYear() - mController.getMinYear()) + 1) * MONTHS_IN_YEAR;
+        // return ((mController.getMaxYear() - mController.getMinYear()) + 1) *
+        // MONTHS_IN_YEAR;
     }
 
     @Override
@@ -193,14 +195,16 @@ public abstract class MonthAdapter extends BaseAdapter implements OnDayClickList
         drawingParams.clear();
 
         final int month = (position + mController.getStartDate().get(UmmalquraCalendar.MONTH)) % MONTHS_IN_YEAR;
-        final int year = (position + mController.getStartDate().get(UmmalquraCalendar.MONTH)) / MONTHS_IN_YEAR + mController.getMinYear();
+        final int year = (position + mController.getStartDate().get(UmmalquraCalendar.MONTH)) / MONTHS_IN_YEAR
+                + mController.getMinYear();
 
         int selectedDay = -1;
         if (isSelectedDayInMonth(year, month)) {
             selectedDay = mSelectedDay.day;
         }
 
-        // Invokes requestLayout() to ensure that the recycled view is set with the appropriate
+        // Invokes requestLayout() to ensure that the recycled view is set with the
+        // appropriate
         // height/number of weeks before being displayed.
         v.reuse();
 
@@ -218,7 +222,6 @@ public abstract class MonthAdapter extends BaseAdapter implements OnDayClickList
     private boolean isSelectedDayInMonth(int year, int month) {
         return mSelectedDay.year == year && mSelectedDay.month == month;
     }
-
 
     @Override
     public void onDayClick(MonthView view, CalendarDay day) {

@@ -25,7 +25,7 @@ import android.view.View;
 
 import androidx.core.content.ContextCompat;
 
-import com.demo.R;
+import com.hijritest.R;
 
 /**
  * Draws a simple white circle on which the numbers will be drawn.
@@ -72,8 +72,7 @@ public class CircleView extends View {
         } else {
             mCircleRadiusMultiplier = Float.parseFloat(
                     res.getString(R.string.mdtp_circle_radius_multiplier));
-            mAmPmCircleRadiusMultiplier =
-                    Float.parseFloat(res.getString(R.string.mdtp_ampm_circle_radius_multiplier));
+            mAmPmCircleRadiusMultiplier = Float.parseFloat(res.getString(R.string.mdtp_ampm_circle_radius_multiplier));
         }
 
         mIsInitialized = true;
@@ -96,7 +95,7 @@ public class CircleView extends View {
                 // a slightly higher center. To keep the entire view centered vertically, we'll
                 // have to push it up by half the radius of the AM/PM circles.
                 int amPmCircleRadius = (int) (mCircleRadius * mAmPmCircleRadiusMultiplier);
-                mYCenter -= amPmCircleRadius*0.75;
+                mYCenter -= amPmCircleRadius * 0.75;
             }
 
             mDrawValuesReady = true;

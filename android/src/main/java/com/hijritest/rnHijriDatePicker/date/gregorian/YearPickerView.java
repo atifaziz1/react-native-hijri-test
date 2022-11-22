@@ -29,8 +29,8 @@ import android.widget.BaseAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
 
-import com.demo.R;
-import com.demo.rnHijriDatePicker.date.gregorian.GregorianDatePickerDialog.OnDateChangedListener;
+import com.hijritest.R;
+import com.hijritest.rnHijriDatePicker.date.gregorian.GregorianDatePickerDialog.OnDateChangedListener;
 
 /**
  * Displays a selectable list of years.

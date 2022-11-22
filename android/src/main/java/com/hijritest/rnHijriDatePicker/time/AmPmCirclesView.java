@@ -27,15 +27,16 @@ import android.view.View;
 
 import androidx.core.content.ContextCompat;
 
-import com.demo.rnHijriDatePicker.Utils;
+import com.hijritest.rnHijriDatePicker.Utils;
 
-import com.demo.R;
+import com.hijritest.R;
 
 import java.text.DateFormatSymbols;
 import java.util.Locale;
 
 /**
- * Draw the two smaller AM and PM circles next to where the larger circle will be.
+ * Draw the two smaller AM and PM circles next to where the larger circle will
+ * be.
  */
 public class AmPmCirclesView extends View {
     private static final String TAG = "AmPmCirclesView";
@@ -106,10 +107,8 @@ public class AmPmCirclesView extends View {
         mPaint.setAntiAlias(true);
         mPaint.setTextAlign(Align.CENTER);
 
-        mCircleRadiusMultiplier =
-                Float.parseFloat(res.getString(R.string.mdtp_circle_radius_multiplier));
-        mAmPmCircleRadiusMultiplier =
-                Float.parseFloat(res.getString(R.string.mdtp_ampm_circle_radius_multiplier));
+        mCircleRadiusMultiplier = Float.parseFloat(res.getString(R.string.mdtp_circle_radius_multiplier));
+        mAmPmCircleRadiusMultiplier = Float.parseFloat(res.getString(R.string.mdtp_ampm_circle_radius_multiplier));
         String[] amPmTexts = new DateFormatSymbols(locale).getAmPmStrings();
         mAmText = amPmTexts[0];
         mPmText = amPmTexts[1];
@@ -141,14 +140,12 @@ public class AmPmCirclesView extends View {
 
         int squaredYDistance = (int) ((yCoord - mAmPmYCenter) * (yCoord - mAmPmYCenter));
 
-        int distanceToAmCenter =
-                (int) Math.sqrt((xCoord - mAmXCenter) * (xCoord - mAmXCenter) + squaredYDistance);
+        int distanceToAmCenter = (int) Math.sqrt((xCoord - mAmXCenter) * (xCoord - mAmXCenter) + squaredYDistance);
         if (distanceToAmCenter <= mAmPmCircleRadius && !mAmDisabled) {
             return AM;
         }
 
-        int distanceToPmCenter =
-                (int) Math.sqrt((xCoord - mPmXCenter) * (xCoord - mPmXCenter) + squaredYDistance);
+        int distanceToPmCenter = (int) Math.sqrt((xCoord - mPmXCenter) * (xCoord - mPmXCenter) + squaredYDistance);
         if (distanceToPmCenter <= mAmPmCircleRadius && !mPmDisabled) {
             return PM;
         }
@@ -167,14 +164,14 @@ public class AmPmCirclesView extends View {
         if (!mDrawValuesReady) {
             int layoutXCenter = getWidth() / 2;
             int layoutYCenter = getHeight() / 2;
-            int circleRadius =
-                    (int) (Math.min(layoutXCenter, layoutYCenter) * mCircleRadiusMultiplier);
+            int circleRadius = (int) (Math.min(layoutXCenter, layoutYCenter) * mCircleRadiusMultiplier);
             mAmPmCircleRadius = (int) (circleRadius * mAmPmCircleRadiusMultiplier);
             layoutYCenter += mAmPmCircleRadius * 0.75;
             int textSize = mAmPmCircleRadius * 3 / 4;
             mPaint.setTextSize(textSize);
 
-            // Line up the vertical center of the AM/PM circles with the bottom of the main circle.
+            // Line up the vertical center of the AM/PM circles with the bottom of the main
+            // circle.
             mAmPmYCenter = layoutYCenter - mAmPmCircleRadius / 2 + circleRadius;
             // Line up the horizontal edges of the AM/PM circles with the horizontal edges
             // of the main circle.
@@ -184,7 +181,8 @@ public class AmPmCirclesView extends View {
             mDrawValuesReady = true;
         }
 
-        // We'll need to draw either a lighter blue (for selection), a darker blue (for touching)
+        // We'll need to draw either a lighter blue (for selection), a darker blue (for
+        // touching)
         // or white (for not selected).
         int amColor = mUnselectedColor;
         int amAlpha = 255;
