@@ -66,7 +66,7 @@ public class AndroidHijriDateWrapper extends ReactContextBaseJavaModule {
         }
         Log.d("newFragment", "newFragment ***************");
 
-//        RNDate rnDate = new RNDate(createFragmentArguments(options));
+        RNDate rnDate = new RNDate(createFragmentArguments(options));
 
       final DatePickerDialogListener listener = new DatePickerDialogListener(promise);
       int cYear = Calendar.getInstance().get(Calendar.YEAR);
@@ -74,10 +74,9 @@ public class AndroidHijriDateWrapper extends ReactContextBaseJavaModule {
 
       int cDay = Calendar.getInstance().get(Calendar.DAY_OF_MONTH);
 
-      UmmalquraCalendar ummalquraCalendar = new UmmalquraCalendar();
-      int year = ummalquraCalendar.get(cYear);
-      int month = ummalquraCalendar.get(cMonth);
-      int day = ummalquraCalendar.get(cDay);
+      int year = (int) rnDate.getValue();
+      int month = (int) rnDate.getMax();
+      int day = (int) rnDate.getMin();
 
 
 
