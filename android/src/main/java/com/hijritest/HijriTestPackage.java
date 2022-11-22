@@ -17,6 +17,7 @@ public class HijriTestPackage implements ReactPackage {
   public List<NativeModule> createNativeModules(@NonNull ReactApplicationContext reactContext) {
     List<NativeModule> modules = new ArrayList<>();
     modules.add(new HijriTestModule(reactContext));
+    modules.add(new AndroidHijriDateWrapper(reactContext));
     return modules;
   }
 
