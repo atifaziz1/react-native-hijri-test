@@ -40,9 +40,24 @@ project.xcworkspace
 local.properties
 android.iml
 
+build/
+.idea
+.gradle
+local.properties
+*.iml
+android/app/release
+**/.project
+**/.settings
+**/.classpath
+
 # Cocoapods
 #
 example/ios/Pods
+example/ios/
+example/yarn.lock
+yarn.lock
+
+example/ios/DemoExample.xcodeproj/project.pbxproj
 
 # Ruby
 example/vendor/
