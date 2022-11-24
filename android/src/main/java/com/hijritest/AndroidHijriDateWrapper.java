@@ -21,10 +21,7 @@ import com.facebook.react.module.annotations.ReactModule;
 
 import com.hijritest.rnHijriDatePicker.RNConstants;
 import com.hijritest.rnHijriDatePicker.RNDate;
- import com.hijritest.rnHijriDatePicker.date.hijri.HijriDatePickerDialog;
-//import net.alhazmy13.hijridatepicker.date.hijri.HijriDatePickerDialog;
-
-import java.util.Calendar;
+import com.hijritest.rnHijriDatePicker.date.hijri.HijriDatePickerDialog;
 
 import javax.annotation.Nonnull;
 
@@ -66,11 +63,9 @@ public class AndroidHijriDateWrapper extends ReactContextBaseJavaModule {
 
         RNDate rnDate = new RNDate(createFragmentArguments(options));
 
-      final DatePickerDialogListener listener = new DatePickerDialogListener(promise);
-//      UmmalquraCalendar now = new UmmalquraCalendar();
+        final DatePickerDialogListener listener = new DatePickerDialogListener(promise);
 
-
-      HijriDatePickerDialog hijriDatePickerDialog = HijriDatePickerDialog.newInstance(listener, rnDate);
+        HijriDatePickerDialog hijriDatePickerDialog = HijriDatePickerDialog.newInstance(listener, rnDate);
 
         hijriDatePickerDialog.setOnDismissListener(listener);
 

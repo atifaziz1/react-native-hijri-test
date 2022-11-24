@@ -1,6 +1,6 @@
 {
   "name": "react-native-hijri-test",
-  "version": "0.1.12",
+  "version": "0.1.13",
   "description": "test",
   "module": "lib/module/index",
   "types": "lib/typescript/index.d.ts",
