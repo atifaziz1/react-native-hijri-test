@@ -19,7 +19,6 @@ import com.facebook.react.bridge.WritableMap;
 import com.facebook.react.bridge.WritableNativeMap;
 import com.facebook.react.module.annotations.ReactModule;
 
-import com.github.msarhan.ummalqura.calendar.UmmalquraCalendar;
 import com.hijritest.rnHijriDatePicker.RNConstants;
 import com.hijritest.rnHijriDatePicker.RNDate;
  import com.hijritest.rnHijriDatePicker.date.hijri.HijriDatePickerDialog;
