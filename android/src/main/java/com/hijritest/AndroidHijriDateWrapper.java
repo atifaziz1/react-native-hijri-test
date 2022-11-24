@@ -68,22 +68,27 @@ public class AndroidHijriDateWrapper extends ReactContextBaseJavaModule {
 
         RNDate rnDate = new RNDate(createFragmentArguments(options));
 
-      final DatePickerDialogListener listener = new DatePickerDialogListener(promise);
-      UmmalquraCalendar now = new UmmalquraCalendar();
+        final DatePickerDialogListener listener = new DatePickerDialogListener(promise);
+        UmmalquraCalendar now = new UmmalquraCalendar();
 
-      Log.d("hijridayofmonth", "udm = "+now.get(Calendar.DAY_OF_MONTH));
-      Log.d("hijridayofmonth", "uy = "+now.get(Calendar.YEAR));
-      Log.d("hijridayofmonth", "um = "+now.get(Calendar.MONTH));
-      Calendar cal = Calendar.getInstance();
-      int year = cal.get(Calendar.YEAR);
-      int month = cal.get(Calendar.MONTH);
-      int dayOfMonth = cal.get(Calendar.DAY_OF_MONTH);
+        Log.d("hijridayofmonth", "udm = " + now.get(Calendar.DAY_OF_MONTH));
+        Log.d("hijridayofmonth", "uy = " + now.get(Calendar.YEAR));
+        Log.d("hijridayofmonth", "um = " + now.get(Calendar.MONTH));
+        Calendar cal = Calendar.getInstance();
+        int year = cal.get(Calendar.YEAR);
+        int month = cal.get(Calendar.MONTH);
+        int dayOfMonth = cal.get(Calendar.DAY_OF_MONTH);
 
-      Log.d("hijridayofmonth", "year "+year);
-      Log.d("hijridayofmonth", "month "+month);
-      Log.d("hijridayofmonth", "dayOfMonth "+dayOfMonth);
+        cal.set(Calendar.YEAR, year);
+        cal.set(Calendar.MONTH, month);
+        cal.set(Calendar.DAY_OF_MONTH, dayOfMonth);
 
-      HijriDatePickerDialog hijriDatePickerDialog = HijriDatePickerDialog.newInstance(listener,  now.get(Calendar.YEAR), month,dayOfMonth);
+        Log.d("hijridayofmonth", "year " + year);
+        Log.d("hijridayofmonth", "month " + month);
+        Log.d("hijridayofmonth", "dayOfMonth " + dayOfMonth);
+
+        HijriDatePickerDialog hijriDatePickerDialog = HijriDatePickerDialog.newInstance(listener,
+                now.get(Calendar.YEAR), month, dayOfMonth);
 
         hijriDatePickerDialog.setOnDismissListener(listener);
 
