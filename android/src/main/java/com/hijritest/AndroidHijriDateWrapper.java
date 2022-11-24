@@ -22,9 +22,8 @@ import com.facebook.react.module.annotations.ReactModule;
 import com.github.msarhan.ummalqura.calendar.UmmalquraCalendar;
 import com.hijritest.rnHijriDatePicker.RNConstants;
 import com.hijritest.rnHijriDatePicker.RNDate;
-//import com.hijritest.rnHijriDatePicker.date.hijri.HijriDatePickerDialog;
-// import com.hijritest.rnHijriDatePicker.date.hijri.HijriDatePickerDialog;
-import net.alhazmy13.hijridatepicker.date.hijri.HijriDatePickerDialog;
+ import com.hijritest.rnHijriDatePicker.date.hijri.HijriDatePickerDialog;
+//import net.alhazmy13.hijridatepicker.date.hijri.HijriDatePickerDialog;
 
 import java.util.Calendar;
 
@@ -66,14 +65,13 @@ public class AndroidHijriDateWrapper extends ReactContextBaseJavaModule {
         }
         Log.d("newFragment", "newFragment ***************");
 
-//        RNDate rnDate = new RNDate(createFragmentArguments(options));
+        RNDate rnDate = new RNDate(createFragmentArguments(options));
 
       final DatePickerDialogListener listener = new DatePickerDialogListener(promise);
-      UmmalquraCalendar now = new UmmalquraCalendar();
+//      UmmalquraCalendar now = new UmmalquraCalendar();
 
-      Log.d("hijridayofmonth", ""+now.get(UmmalquraCalendar.DAY_OF_MONTH));
 
-      HijriDatePickerDialog hijriDatePickerDialog = HijriDatePickerDialog.newInstance(listener,  now.get(UmmalquraCalendar.YEAR), now.get(UmmalquraCalendar.MONTH),now.get(UmmalquraCalendar.DAY_OF_MONTH));
+      HijriDatePickerDialog hijriDatePickerDialog = HijriDatePickerDialog.newInstance(listener, rnDate);
 
         hijriDatePickerDialog.setOnDismissListener(listener);
 
