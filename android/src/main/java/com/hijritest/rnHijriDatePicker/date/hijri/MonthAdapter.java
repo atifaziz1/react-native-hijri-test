@@ -24,7 +24,6 @@ import android.widget.AbsListView.LayoutParams;
 import android.widget.BaseAdapter;
 
 //import com.github.msarhan.ummalqura.calendar.UmmalquraCalendar;
-//import com.alrajhiretailapp.rnHijriDatePicker.calendar.UmmalquraCalendar;
 import com.github.msarhan.ummalqura.calendar.UmmalquraCalendar;
 import com.hijritest.rnHijriDatePicker.date.hijri.MonthView.OnDayClickListener;
 
