@@ -9,14 +9,6 @@ buildscript {
   }
 }
 
-//allprojects {
-//  repositories {
-//    jcenter()
-//    google()
-//    maven { url "https://dl.bintray.com/alhazmy13/maven" }
-//  }
-//}
-
 def isNewArchitectureEnabled() {
   return rootProject.hasProperty("newArchEnabled") &&  rootProject.getProperty("newArchEnabled") == "true"
 }
@@ -137,8 +129,6 @@ dependencies {
 // From node_modules
   implementation 'com.google.android.material:material:1.1.0'
   api group: 'com.github.msarhan', name: 'ummalqura-calendar', version:'2.0.1'
-//  implementation 'net.alhazmy13.hijridatepicker:library:3.0.0'
-//  api group: 'net.alhazmy13.hijridatepicker', name:'library', version:'3.0.0'
 }
 
 if (isNewArchitectureEnabled()) {
