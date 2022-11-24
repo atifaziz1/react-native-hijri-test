@@ -72,6 +72,7 @@ public class AndroidHijriDateWrapper extends ReactContextBaseJavaModule {
       UmmalquraCalendar now = new UmmalquraCalendar();
 
       Log.d("hijridayofmonth", ""+now.get(Calendar.DAY_OF_MONTH));
+      Log.d("hijridayofmonth", ""+now.get(Calendar.YEAR));
       Calendar cal = Calendar.getInstance();
       int year = cal.get(Calendar.YEAR);
       int month = cal.get(Calendar.MONTH);
@@ -81,7 +82,7 @@ public class AndroidHijriDateWrapper extends ReactContextBaseJavaModule {
       Log.d("hijridayofmonth", "month "+month);
       Log.d("hijridayofmonth", "dayOfMonth "+dayOfMonth);
 
-      HijriDatePickerDialog hijriDatePickerDialog = HijriDatePickerDialog.newInstance(listener,  now.get(year), now.get(month),now.get(dayOfMonth));
+      HijriDatePickerDialog hijriDatePickerDialog = HijriDatePickerDialog.newInstance(listener,  now.get(Calendar.YEAR), now.get(month),now.get(dayOfMonth));
 
         hijriDatePickerDialog.setOnDismissListener(listener);
 
